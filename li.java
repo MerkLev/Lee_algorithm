@@ -86,7 +86,7 @@ public class Li {
             }  
         }
         System.out.println(Path); // Более явная пометка проложенного маршрута 
-        for( int H = 0; H<Path.size();H++){
+        for( int H = 0; H<Path.size();H++){// Более явная пометка проложенного маршрута 
             buff = Path.get(H);
             Matrix[buff.getX()][buff.getY()] = 111111; // Пометка ячейки, по которой идет путь
         }
