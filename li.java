@@ -3,19 +3,28 @@ import java.util.Random;
 import point.*;
 import java.util.*;
 
-public class li {
+public class Li {
     public static void main(String[] args) {
         Queue<point> q = new LinkedList<point>();
         int [][] Matrix = new int [10][10];  // Создание матрицы, можно реализовать ввод размера с консоли
         Scanner Sc = new Scanner(System.in);
-        System.out.println("Задайте координату Х для входа в матрицы: ");   // Создание точки старта
+        System.out.println("Задайте координату Х для входа в матрицу: ");   // Создание точки старта
         int enterX = Sc.nextInt();
-        System.out.println("Задайте координату У для входа в матрицы: ");
+        System.out.println("Задайте координату Y для входа в матрицу: ");
         int enterY = Sc.nextInt();
         System.out.println("Задайте координату Х для выхода из матрицы: ");  // Создание точки выхода
         int exitX = Sc.nextInt();
-        System.out.println("Задайте координату У для выхода из матрицы: ");
+        System.out.println("Задайте координату Y для выхода из матрицы: ");
         int exitY = Sc.nextInt();
+        System.out.println("Введите колличество клеток-препятствий для матрицы: "); // Создение стен в матрице 
+        int wallAmount = Sc.nextInt();
+        for( int C =0; C<wallAmount; C++){
+            System.out.print("Задайте координату Х для стены:  ");
+            int wallX = Sc.nextInt();
+            System.out.print("Задайте координату Y для стены:  ");
+            int wallY = Sc.nextInt();
+            Matrix[wallY][wallX] = -1;  // "-1" обозначение для непроходимой области
+        }
         point buff = new point(enterX,enterY); // Переменная для "Запоминания" координат
         Matrix[buff.getX()][buff.getY()] = 1;  // Пометка первого шага
         q.add(buff); // добавление в очередь точки начала
@@ -76,6 +85,16 @@ public class li {
                 }
             }  
         }
-        System.out.println(Path); // Печать найденного пути
+        System.out.println(Path); // Более явная пометка проложенного маршрута 
+        for( int H = 0; H<Path.size();H++){
+            buff = Path.get(H);
+            Matrix[buff.getX()][buff.getY()] = 111111; // Пометка ячейки, по которой идет путь
+        }
+        for (int k = 0; k < Matrix.length; k++) {         // печать помеченной матрицы
+            for (int j = 0; j < Matrix[k].length; j++) {
+                System.out.print(Matrix[k][j] + "\t");
+                }
+            System.out.println();
+        }        
     }
 }
